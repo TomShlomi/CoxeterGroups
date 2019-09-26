@@ -1,17 +1,20 @@
-import java.util.ArrayList;
-import java.util.List;
+public class B_n extends CoxeterGroup {
 
-public class A_n extends CoxeterGroup {
+  @Override
+  public int order() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-    private int[] perm; //The symmetric group representation of this element
-    private List<Integer> word; //The word (not necessarily reduced)
+    private int[] perm; // The symmetric group representation of this element
+    private List<Integer> word; // The word (not necessarily reduced)
 
-    public A_n(int[] perm) {
-        setSize(perm.length);
+    public B_n(int[] perm) {
+        setSize(perm.length/2);
         this.perm = perm;
     }
 
-    public A_n(int n, int[] seq) {
+    public B_n(int n, int[] seq) {
         word = new ArrayList<Integer>();
         setSize(n);
         for (int i = 0; i < seq.length; i++) {
@@ -22,11 +25,11 @@ public class A_n extends CoxeterGroup {
     public int[] setPerm() {
         int[] perm = new int[n()];
         for (int i = 0; i < n(); i++) {
-            perm[i] = i+1;
+            perm[i] = i + 1;
         }
         for (int i = 0; i < word.size(); i++) {
-            int temp = perm[word.get(i)-1];
-            perm[word.get(i)-1] = perm[word.get(i)];
+            int temp = perm[word.get(i) - 1];
+            perm[word.get(i) - 1] = perm[word.get(i)];
             perm[word.get(i)] = temp;
         }
         this.perm = perm;
@@ -35,10 +38,10 @@ public class A_n extends CoxeterGroup {
 
     public List<Integer> setWord() {
         List<Integer> word = new ArrayList<Integer>();
-        //word.add(0);
+        // word.add(0);
         int[] temp = perm.clone();
         for (int i = 1; i < n(); i++) {
-            for (int j = i-1; j < n(); j++) {
+            for (int j = i - 1; j < n(); j++) {
                 if (temp[j] == i) {
                     temp[j] = temp[i];
                     temp[i] = i;
@@ -59,10 +62,6 @@ public class A_n extends CoxeterGroup {
 
     public List<Integer> getWord() {
         return word;
-    }
-
-    public int order() {
-        return 0;
     }
 
 }
