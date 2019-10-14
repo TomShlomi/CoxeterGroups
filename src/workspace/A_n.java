@@ -64,4 +64,17 @@ public class A_n extends CoxeterGroup {
   public int order() {
     return 0;
   }
+
+  public int[] getDescents() {
+      int nzero = 0;
+      int[] descent = new int[perm.length-1];
+      for (int i = 0; i < perm.length - 1; i++) {
+          if (perm[i] > perm[i+1]) {
+              descent[i] = i;
+              nzero++;
+          }
+      }
+      int[] ret = new int[]
+  }
+
 }
