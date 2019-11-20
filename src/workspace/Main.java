@@ -10,9 +10,18 @@ public class Main {
      * <p>int[] perm = {5, 4, 3, 2, 1}; a = new A_n(perm); a.setWord(); List<Integer> l =
      * a.getWord(); System.out.println(l);
      */
-    ArrayList<E6> e6s = E6.all();
-    for (E6 e6 : e6s) {
-      System.out.println(e6);
+    ArrayList<H3> h3s = H3.all();
+    for (H3 h3 : h3s) {
+      System.out.println(h3);
     }
+    ArrayList<ClassA> as = ClassA.all(3);
+    for (ClassA a : as) {
+      System.out.print(a);
+      for (int b : a.getWord()) {
+        System.out.print(" " + b);
+      }
+      System.out.print("\n");
+    }
+    System.out.println(h3s.size());
   }
 }

@@ -1,12 +1,18 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClassB extends CoxeterGroup {
 
+  private int[] perm; // The symmetric group representation of this element
+  private int[] lehmer;
+  private List<Integer> word; // The word (not necessarily reduced)
+
   @Override
   public int order() {
-    // TODO Auto-generated method stub
-    return 0;
+    int n = getGenNum();
+    return (int) (ClassA.factorial(n)*Math.pow(2, n));
   }
 
   @Override
@@ -24,31 +30,33 @@ public class ClassB extends CoxeterGroup {
         l.add(gword.get(i));
       }
 
-      return new ClassB(getGenNum(), l);
+      return new ClassB(l, getGenNum());
     }
     return null;
   }
 
-  private int[] perm; // The symmetric group representation of this element
-  private List<Integer> word; // The word (not necessarily reduced)
+  @NotNull
+  public static ArrayList<ClassB> all(int n) {
+    ArrayList<ClassA> as = ClassA.all(n);
+    ArrayList<ClassB> bs = new ArrayList<>();
+    for (ClassA a : as) {
+      while (true) {}
+    }
+    return bs;
+  }
+
+  @Override
+  public ArrayList<Group> getElements() {
+    return null;
+  }
 
   public ClassB(int[] perm) {
-    setSize(perm.length / 2);
-    this.perm = perm.clone();
+    super(null);
   }
 
-  public ClassB(int n, int[] seq) {
-    word = new ArrayList<Integer>();
-    setSize(n);
-    for (int i = 0; i < seq.length; i++) {
-      word.add(Integer.valueOf(seq[i]));
-    }
-  }
 
-  public ClassB(int n, List<Integer> word) {
-    setWord(word);
-    setSize(n);
-    setPerm();
+  public ClassB(List<Integer> word, int n) {
+    super(word, n);
   }
 
   public int[] setPerm() {
