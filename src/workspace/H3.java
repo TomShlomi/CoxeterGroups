@@ -79,6 +79,11 @@ public class H3 extends CoxeterGroup {
     return gs;
   }
 
+  @Override
+  public Group identity() {
+    return null;
+  }
+
   public boolean getSign() {
     return sign;
   }

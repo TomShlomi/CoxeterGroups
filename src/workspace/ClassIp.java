@@ -25,6 +25,11 @@ public class ClassIp extends CoxeterGroup {
   }
 
   @Override
+  public Group identity() {
+    return null;
+  }
+
+  @Override
   public List<Integer> setWord() {
     return null;
   }

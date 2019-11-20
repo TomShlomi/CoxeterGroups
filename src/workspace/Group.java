@@ -1,3 +1,4 @@
+import com.sun.javafx.scene.paint.GradientUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,4 +18,6 @@ public abstract class Group {
   }
 
   public abstract ArrayList<Group> getElements();
+
+  public abstract Group identity();
 }
