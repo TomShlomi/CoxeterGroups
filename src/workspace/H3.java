@@ -1,6 +1,3 @@
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,39 +15,28 @@ public class H3 extends CoxeterGroup {
     super(w, 6);
   }
 
-  @Contract(value = "null -> false", pure = true)
-  public boolean equals(Object o) {
-    if (o instanceof H3) {
-      H3 h3 = (H3) o;
-      int[] perm = getPermutation();
-      if ((perm == h3.getPermutation()) && sign == h3.getSign()) {
-        return true;
-      }
-      if (getWord().equals(h3.getWord())) {
-        return true;
-      }
-    }
-    return false;
+  public int hashCode() {
+
+    return 0;
   }
 
-  @NotNull
   public static ArrayList<H3> all() {
     ArrayList<H3> h3s = new ArrayList<>();
     ArrayList<ClassA> as = ClassA.all(5);
     for (ClassA a : as) {
       int size = a.getWord().size();
       if (2 * (size / 2) == size) {
-        int[] perm = a.getPermutation();
+        int[] perm = a.getPerm();
         h3s.add(new H3(true, perm));
         h3s.add(new H3(false, perm));
       }
     }
     return h3s;
-    /**
-     * ArrayList<E6> e6s = new ArrayList<E6>(); e6s.add(new E6(true, new int[] {1, 2, 3, 4, 5}));
-     * int s = 0; int f = 1; while (true) { for (int i = s; i < f; i++) { e6s.add(new
-     * E6(!e6s.get(i).getSign(), e6s.get(i).getPerm())); } break; } return e6s;
-     */
+    /*
+     ArrayList<E6> e6s = new ArrayList<E6>(); e6s.add(new E6(true, new int[] {1, 2, 3, 4, 5}));
+     int s = 0; int f = 1; while (true) { for (int i = s; i < f; i++) { e6s.add(new
+     E6(!e6s.get(i).getSign(), e6s.get(i).getPerm())); } break; } return e6s;
+    */
   }
 
   /**
@@ -60,28 +46,35 @@ public class H3 extends CoxeterGroup {
    * <p>return word; }
    */
   @Override
-  public int order() {
+  public int groupOrder() {
     return 120;
   }
 
   @Override
-  public Group compose(Group g) {
-    return null;
+  public Group times(Group g) {
+    if (g instanceof H3) {
+      H3 h3 = (H3) g;
+      boolean s = h3.getSign() == sign;
+      int[] p = new int[5];
+      for (int i = 0; i < 5; i++) {
+        p[i] = h3.getPerm()[getPerm()[i] - 1];
+      }
+      return new H3(s, p);
+    }
+    throw new AssertionError();
   }
 
   @Override
   public ArrayList<Group> getElements() {
     ArrayList<H3> h3s = all();
     ArrayList<Group> gs = new ArrayList<>();
-    for (H3 h3 : h3s) {
-      gs.add(h3);
-    }
+    gs.addAll(h3s);
     return gs;
   }
 
   @Override
   public Group identity() {
-    return null;
+    return new H3(true, new int[] {1, 2, 3, 4, 5});
   }
 
   public boolean getSign() {
@@ -94,14 +87,21 @@ public class H3 extends CoxeterGroup {
     if (sign) {
       s = "+";
     }
-    for (int i : getPermutation()) {
+    for (int i : getPerm()) {
       s = s + i;
     }
     return s;
   }
 
   @Override
-  public List<Integer> setWord() {
-    return null;
+  public void setWord() {
+    setWord(new ArrayList<>());
+  }
+
+  public static boolean testBasis(H3 a, H3 b, H3 c) {
+    if (a.order() != 2 || b.order() != 2 || c.order() != 2) {
+      return false;
+    }
+    return a.times(b).order() == 5 && b.times(c).order() == 3 && c.times(a).order() == 2;
   }
 }

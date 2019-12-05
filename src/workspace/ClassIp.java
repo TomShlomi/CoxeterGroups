@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class ClassIp extends CoxeterGroup {
 
@@ -10,12 +9,12 @@ public class ClassIp extends CoxeterGroup {
     this.p = p;
   }
 
-  public int order() {
+  public int groupOrder() {
     return 2 * p;
   }
 
   @Override
-  public Group compose(Group g) {
+  public Group times(Group g) {
     return null;
   }
 
@@ -30,7 +29,5 @@ public class ClassIp extends CoxeterGroup {
   }
 
   @Override
-  public List<Integer> setWord() {
-    return null;
-  }
+  public void setWord() {}
 }
