@@ -40,16 +40,18 @@ public abstract class CoxeterGroup extends Group {
    * Constructs an element based upon its Lehmer code.
    *
    * @param lehmer the Lehmer code
-   * @param n just here to diffentiate it from the permuation represnetation.
+   * @param n just here to differentiate it from the permutation representationn.
    */
   public CoxeterGroup(int[] lehmer, int n) {
     for (int i = 0; i < lehmer.length; i++) {
-      if (lehmer[i] > lehmer.length - i) throw new AssertionError();
+      if (lehmer[i] > lehmer.length - i)
+        throw new IllegalArgumentException(); // The Lehmer codes value at i must be at least 0 and
+      // at most lehmer.length - i
     }
     this.lehmer = lehmer.clone();
     List<Integer> temp = new ArrayList<>();
-    perm = new int[n];
-    for (int i = 1; i <= n; i++) {
+    perm = new int[lehmer.length + 1];
+    for (int i = 1; i < perm.length; i++) {
       temp.add(i);
     }
     for (int i = 0; i < lehmer.length; i++) {
