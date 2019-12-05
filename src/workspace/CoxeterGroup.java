@@ -28,7 +28,7 @@ public abstract class CoxeterGroup extends Group {
    * @param n The number of generators.
    */
   public CoxeterGroup(List<Integer> word, int n) {
-    for (int i : word) if (i < 1 || i > n) throw new AssertionError();
+    for (int i : word) if (i < 1 || i > n) throw new IllegalArgumentException();
     this.word = word;
     generatorNum = n;
     setPerm();
@@ -83,8 +83,8 @@ public abstract class CoxeterGroup extends Group {
   }
 
   protected int[] setPerm() {
-    perm = new int[getGenNum()];
-    for (int i = 0; i < getGenNum(); i++) {
+    perm = new int[getGenNum() + 1];
+    for (int i = 0; i <= getGenNum(); i++) {
       perm[i] = i + 1;
     }
     List<Integer> word = getWord();

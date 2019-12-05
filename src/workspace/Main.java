@@ -22,9 +22,19 @@ public class Main {
             + "To take the composition of two permutations, just take the first and shuffle it according to the second. Try it by writing a permutation of length 5: ");
     Scanner s = new Scanner(System.in);
     ClassA a1 = getClassA(s);
-    System.out.print("\nNow type another permutation of length 5.");
+    System.out.print("\nNow type another permutation of length 5: ");
     ClassA a2 = getClassA(s);
     System.out.print(a1 + " composed with " + a2 + " is " + a1.times(a2));
+    System.out.print(
+        "\nOne interesting part of these permutations are their descent sets, the places where the value goes down. "
+            + "The descent set of "
+            + a1
+            + " is "
+            + a1.getDescents()
+            + ", and the descent set of "
+            + a2
+            + " is "
+            + a2.getDescents());
     s.close();
   }
 

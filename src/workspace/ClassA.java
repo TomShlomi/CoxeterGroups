@@ -45,12 +45,10 @@ public class ClassA extends CoxeterGroup {
     if (g instanceof ClassA
         && ((ClassA) g).getGenNum()
             == getGenNum()) { // checks that g is an element of a the same group as this
-      List<Integer> l = new ArrayList<>();
-      List<Integer> word = getWord();
-      l.addAll(word);
-      List<Integer> gword = ((ClassA) g).getWord();
-      l.addAll(gword);
-      return new ClassA(l, getGenNum());
+      List<Integer> l = new ArrayList<>(); //the word of the product
+      l.addAll(getWord()); //adds the word of this element
+      l.addAll(((ClassA) g).getWord()); //adds the word of the element it is being composed with
+      return new ClassA(l, getGenNum()); //returns the group
     }
     return null;
   }
